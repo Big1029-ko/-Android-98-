@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>Accessibility Mode</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-size: 42px;
+      padding: 50px;
+      text-align: center;
+      user-select: none;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <p>กำลังเปิดโหมดผู้พิการ...</p>
+  <p>ระบบจะกลับมาเป็นปกติใน 1 ชั่วโมง</p>
+  <p>กรุณาอย่าปิดเครื่อง</p>
+
+  <!-- เสียง Siri Clone -->
+  <audio id="siriVoice" autoplay loop>
+    <source src="https://ttsmp3.com/created_mp3/20240707124528_b9d2b2c70f5940a9516fc47cfe4a8c6c.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- เสียงเอฟเฟกต์หลอน -->
+  <audio id="effect" autoplay loop>
+    <source src="https://www.soundjay.com/button/beep-09.mp3" type="audio/mp3">
+  </audio>
+
+  <script>
+    // แจ้งเตือนวน
+    const phrases = [
+      "โหมดผู้พิการเปิดอยู่",
+      "โปรดใช้สองนิ้วในการเลื่อน",
+      "แตะสองครั้งเพื่อเลือก",
+      "Siri: กำลังเปิดการช่วยเหลือ",
+    ];
+
+    let i = 0;
+    setInterval(() => {
+      alert(phrases[i % phrases.length]);
+      i++;
+    }, 20000); // เด้งทุก 20 วินาที
+
+    // ตั้งเวลาปิดหลอกใน 1 ชั่วโมง (3600000 มิลลิวินาที)
+    setTimeout(() => {
+      document.body.innerHTML = "<h1 style='color:lime;'>กลับสู่โหมดปกติแล้ว ✔</h1>";
+      document.getElementById("siriVoice").pause();
+      document.getElementById("effect").pause();
+    }, 3600000);
+  </script>
+</body>
+</html>
